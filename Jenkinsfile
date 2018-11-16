@@ -20,8 +20,8 @@ pipeline {
         }
         stage('Report'){
             steps {
-                withCredentials([string(credentialsId: 'id-1', variable: 'jenkins-github-token')]) {
-                sh 'aws cloudformation describe-stack-resources --region us-east-1 --stack-name jenkins'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'jenkins-github-token', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    sh 'aws cloudformation describe-stack-resources --region us-east-1 --stack-name jenkins'
                 }
             }
         }
