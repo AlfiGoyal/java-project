@@ -13,5 +13,10 @@ pipeline {
                 sh 'ant -f build.xml -v'
             }
         }
+        stage ("Deploy") {
+            steps {
+                    sh 'aws s3 cp /workspace/Assignment9Pipeline/dist/rectangle-*.jar s3://jenkins-assignment9-s3bucket-ag/' 
+            }
+        }
      }
  }
