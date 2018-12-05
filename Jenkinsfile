@@ -2,7 +2,7 @@ pipeline {
     agent { label 'linux' }
     stages { 
         stage ("Unit Tests") {
-          steps {
+          steps { 
             sh "ant -f test.xml -v"
             junit "reports/result.xml"
           }
@@ -14,7 +14,7 @@ pipeline {
         }
         stage ("Deploy") {
             steps {
-                    sh 'aws s3 cp /workspace/java-pipeline/dist/rectangle-*.jar s3://jenkins-assignment9-s3bucket-ag/' 
+                    sh 'aws s3 cp /workspace/java-pipeline/dist/rectangle-${BUILD_NUMBER}.jar s3://jenkins-assignment9-s3bucket-ag/' 
             }
         }
         stage('Report'){
